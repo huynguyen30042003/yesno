@@ -53,30 +53,34 @@ function Answer() {
   }
   return(
     <>
-    {/* {JSON.stringify(answer)} */}
-    <a>player tham gia </a>
-    {
-      list.map((item,index)=>(
-        <a>{list[index].namePlayer}</a>
-      ))
-    }
+    <div className="player">
+      <a>player tham gia </a>
+      {
+        list.map((item,index)=>(
+          <a className="namePlayer">{list[index].namePlayer}</a>
+          ))
+      }
+    </div>
+    <div className="allRound">
+
     {
       answer.map((answer,index)=>(
-        <div >
+        <div className="round">
           <a> cau {index+1}</a>
           <a> ket qua {answer}</a>
+          <div className="playTrue">
           {
             list.map((item,id)=>(
-              <>
               <a className={answer==list[id].ans[index]  ?'true':'false'}>{list[id].namePlayer}</a>
-              </>
             ))
           }
+          </div>
 
         </div>
       ))
-
+      
     }
+    </div>
     <button 
     className=""
     onClick={moveToResult}

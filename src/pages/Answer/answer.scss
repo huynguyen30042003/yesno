@@ -4,3 +4,32 @@
 .false{
     display: none;
 }
+.player{
+    a{
+        font-size: 32px;
+        color: black;
+    }
+    .namePlayer{
+        font-size: 32px;
+        color: black;
+        padding-left: 10px;
+    }
+}
+.allRound{
+    display: flex;
+    
+    .round{
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        a{
+            font-size: 24px;
+            color: black;
+        }
+        .playTrue{
+            a{
+                padding-right: 10px;
+            }
+        }
+    }
+}
