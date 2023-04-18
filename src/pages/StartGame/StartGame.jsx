@@ -64,14 +64,16 @@ function StartGame() {
     setList(newList);
   };
   return (
-  <>
+  <div className='startGame'>
     <div className='playRound'>
-      <a>luoc choi cua {list[count].namePlayer}</a>
+      <a>Turn for {list[count].namePlayer}</a>
     </div>
+    <div className='allQuestion'>
+
     {
       list[count].ans.map((item,index)=>(
         <div className='question'>
-          <a>cau hoi so {index+1}</a>
+          <a>Question {index+1}</a>
           <div className='choose'>
             <button className={item!='empty'&& item=='yes'?'yes':'empty'}
             onClick={()=>chooseYes(index)}
@@ -83,10 +85,13 @@ function StartGame() {
         </div>
       ))
     }
-        <button
-    onClick={next}
-    >submit</button>
-  </>
+    </div>
+    <div className='button'>
+      <button
+      onClick={next}  
+      >submit</button>
+    </div>
+  </div>
 )
 }
 

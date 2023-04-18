@@ -4,15 +4,49 @@
 }
 .no{
     color: brown;
-    background-color: aquamarine !important;
+    background-color: #4D7BFF !important;
 }
-.playRound{
-    a{
-        font-size: 32px;
+.startGame{
+    background-color: aliceblue;
+    width: 80vw;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    border: 4px solid #000 ;
+    .playRound{
+        a{
+            font-size: 32px;
+        }
     }
-}
-.question{
-    a:first-child{
-        font-size: 24px;
+    .allQuestion{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .question{
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            a{
+                font-size: 24px;
+            }
+            .choose{
+                padding-top: 16px;
+                button{
+                    width: 150px;
+                }
+            }
+        }
+    }
+    .button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button{
+            width: 150px;
+        }
     }
 }

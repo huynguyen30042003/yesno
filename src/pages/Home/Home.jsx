@@ -24,8 +24,8 @@ function Home() {
   useEffect(()=>{
     localStorage.setItem("round",JSON.stringify(roundPlay))
     if( (isNaN(+roundPlay)) || (+roundPlay<=0)) {
-      alert("hay nhap so duong");
-      setRoundPlay('')
+      // alert("hay nhap so duong");
+      // setRoundPlay('')
     }else{
       setCount(0)
       console.log(+roundPlay);
@@ -50,7 +50,12 @@ function Home() {
   }
   const isFinishAddPlayer = () => {
     let inputNameCheck =inputName;
-    if(inputNameCheck==''){
+    console.log(inputName);
+    function isValidName(inputName) {
+      console.log(inputNameCheck);
+      return /^[a-zA-Z\s]+$/.test(inputNameCheck);
+    }
+    if(inputNameCheck=='' || !isValidName()){
       alert("try again");
     }else{
       const now = new Date();
@@ -75,12 +80,19 @@ function Home() {
   const chooseRoundPlay = (e) => {
       setRoundPlay(e.target.value)
   }
-  const move=()=>{
-    navigate(`/start/${list[0].namePlayer}`)
+  const keyEnterDownToAdd=(e)=>{
+    if (e.key=="Enter") {
+      isFinishAddPlayer()
+    }
+  }
+  const keyEnterDownToPlay=(e)=>{
+    if (e.key=="Enter") {
+      startPlay()
+    }
   }
   const startPlay = ()=>{
     if( (isNaN(+roundPlay)) || (+roundPlay<=0)) {
-      alert("hay nhap so duong");
+      // alert("hay nhap so duong");
       setRoundPlay('')
     }else{
       console.log(+roundPlay);
@@ -95,14 +107,17 @@ function Home() {
   return (
     <div className='Home'>
       <div className='Tutorial'>
-        <a>game chon nguoi thang</a>
+        <a>Play to Win</a>
       </div>
 
-      <div className={list.length!=0?'PlayerReady':'Display-none'}>
+      <div className='Player'>
         {list.map((item,index)=>(
-          <a>player {index+1} {item.namePlayer}</a>
-          
+          <div className={list.length!=0?'PlayerReady':'Display-none'}>
+              <a>Player {index+1} {item.namePlayer}</a>
+
+          </div>
         ))}
+
       </div>
 
       <button className={addPlayer==0?'':' Display-none'}
@@ -116,6 +131,7 @@ function Home() {
           <input
           value={inputName}
           onChange={(e)=>setNamePlayer(e)}
+          onKeyDown={(e)=>keyEnterDownToAdd(e)}
           ></input>
           <button
           onClick={isFinishAddPlayer}
@@ -123,13 +139,15 @@ function Home() {
       </div>
       
       <div className={list.length>=2?'RoundPLay':'Display-none'}>
-        <a>choose the round play</a>
-        <input 
+        <a>Enter the round to play</a>
+        <input placeholder='Enter the round'
         onChange={(e)=>chooseRoundPlay(e)}
+        onKeyDown={(e)=>keyEnterDownToPlay(e)}
         value={roundPlay}
         ></input>
         <button 
         onClick={startPlay}
+        className={(isNaN(+roundPlay)) || (+roundPlay<=0)?'Display-none':''}
         >play</button>
       </div>
     </div>

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Input,Table } from 'antd';
 import { useState, useEffect } from "react";
-
+import result from './result.scss'
 
 
 function Result() {
   const [search, setSearch] = useState("")
-  const [page, setPage] = useState(1)
-  const [pageSite, setPageSite] = useState(5)
+  const [page1, setPage1] = useState(1)
+  const [page2, setPage2] = useState(1)
+  const [pageSite1, setPageSite1] = useState(5)
+  const [pageSite2, setPageSite2] = useState(5)
   const [list, setList] = useState(
     JSON.parse(localStorage.getItem("list")) ?? []
   );
@@ -17,6 +19,7 @@ function Result() {
   useEffect(()=>{
     localStorage.setItem("list",JSON.stringify(list))
   },[list]) 
+  let maxPoint=0;
   list.map((item)=>{
     let point=0
     for (let i = 0; i < list[0].ans.length; i++) {
@@ -25,6 +28,9 @@ function Result() {
       }
     }
     item.point=point
+    if (maxPoint<point) {
+      maxPoint=point
+    }
   })
   for (let index = 0; index < list.length; index++) {
     
@@ -121,7 +127,8 @@ function Result() {
   ]
   return (
     <>
-      <a> final result</a>
+    
+      <a className='first__a'> FINAL RESULT</a>
       <Input.Search 
       placeholder="Search here"
       onSearch={(value)=>{
@@ -133,11 +140,11 @@ function Result() {
       columns={columns}
       dataSource={list}
       pagination={{
-        current:page,
-        pageSize:pageSite,
-        onChange:(page,pageSite)=>{
-          setPage(page);
-          setPageSite(pageSite);
+        current:page1,
+        pageSize:pageSite1,
+        onChange:(page1,pageSite1)=>{
+          setPage1(page1);
+          setPageSite1(pageSite1);
         }
       }}
       ></Table>
@@ -145,15 +152,24 @@ function Result() {
       <Table
             columns={columns2}
             dataSource={list}
-            pagination={{
-              current:page,
-              pageSize:pageSite,
-              onChange:(page,pageSite)=>{
-                setPage(page);
-                setPageSite(pageSite);
+            pagination={{ 
+              current:page2,
+              pageSize:pageSite2,
+              onChange:(page2,pageSite2)=>{
+                setPage2(page2);
+                setPageSite2(pageSite2);
               }
             }}
       ></Table>
+      <div className='winner'>
+        <a>The winner is 
+        {
+          list.map((item)=>
+          (
+            <a>{item.point==maxPoint?item.namePlayer:""}</a>
+          )
+        )}</a>
+      </div>
     </>
   )
 }

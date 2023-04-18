@@ -56,26 +56,27 @@ function Answer() {
   // list.push({ result: answer });
 
   return(
-    <>
-    <div className="player">
-      <a>player tham gia </a>
-      {
-        list.map((item,index)=>(
-          <a className="namePlayer">{list[index].namePlayer}</a>
-          ))
-      }
-    </div>
+    <div className="Answer">
+      <div className="player">
+        <a>Player </a>
+        {
+          list.map((item,index)=>(
+            <a className="namePlayer">{list[index].namePlayer}</a>
+            ))
+        }
+      </div>
     <div className="allRound">
 
     {
       answer.map((answer,index)=>(
         <div className="round">
-          <a> cau {index+1}</a>
-          <a> ket qua {answer}</a>
+          <a> Question: {index+1}</a>
+          <a> Result: {answer}</a>
           <div className="playTrue">
+            <a>Player correct:</a>
           {
             list.map((item,id)=>(
-              <a className={answer==list[id].ans[index]  ?'true':'false'}>{list[id].namePlayer}</a>
+              <a className={answer==list[id].ans[index]  ?'true':'false'}> {list[id].namePlayer}</a>
             ))
           }
           </div>
@@ -85,11 +86,12 @@ function Answer() {
       
     }
     </div>
-    <button 
-    className=""
-    onClick={moveToResult}
-    >result</button>
-    </>
+    <div className="button">
+      <button 
+      onClick={moveToResult}
+      >Result</button>
+      </div>
+    </div>
   );
 }
 
