@@ -11,7 +11,7 @@ function Home() {
   const [roundPlay,setRoundPlay] = useState(JSON.parse(localStorage.getItem('round')) ?? 1)
   const [list,setList] = useState(JSON.parse(localStorage.getItem('list')) ??[])
   const [count,setCount] = useState(JSON.parse(localStorage.getItem('turn')) ?? 0)
-
+  const [id, setId] = useState(1)
   useEffect(()=>{
     localStorage.setItem("turn",JSON.stringify(count))
     console.log(JSON.parse(localStorage.getItem("turn")));
@@ -53,8 +53,23 @@ function Home() {
     if(inputNameCheck==''){
       alert("try again");
     }else{
-      setList([...list,{namePlayer:inputName}])
+      const now = new Date();
+      setList([...list,{namePlayer:inputName,
+        id:id,
+        createAt: now.toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: false
+      }),
+      result:[],
+    
+    }])
       setAddPlayer(0);
+      setId(id+1)
     }
   }
   const chooseRoundPlay = (e) => {

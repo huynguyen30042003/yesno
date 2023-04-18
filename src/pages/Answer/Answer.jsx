@@ -46,11 +46,15 @@ function Answer() {
       
     }
     getValues();
+    
   }, [roundPLay]);
+  localStorage.setItem("answer", JSON.stringify(answer));
   console.log(list[1].ans[1]);
   const moveToResult=()=>{
     navigate('/Result')
   }
+  // list.push({ result: answer });
+
   return(
     <>
     <div className="player">

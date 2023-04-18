@@ -75,7 +75,7 @@ function StartGame() {
           <div className='choose'>
             <button className={item!='empty'&& item=='yes'?'yes':'empty'}
             onClick={()=>chooseYes(index)}
-            >yes{index}   {item}</button>
+            >yes   </button>
             <button className={item!='empty'&& item=='no'?'no':'empty'}
             onClick={()=>chooseNo(index)}
             >no</button>
